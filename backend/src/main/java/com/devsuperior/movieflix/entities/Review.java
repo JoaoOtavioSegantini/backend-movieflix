@@ -26,15 +26,20 @@ public class Review implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
+	
+	@ManyToOne
+	@JoinColumn(name = "movie_id")
+	private Movie movie;
 	public Review () {
 		
 	}
 
 
-	public Review(Long id, String text, User user) {
+	public Review(Long id, String text, User user, Movie movie) {
 		this.id = id;
 		this.text = text;
 		this.user = user;
+		this.movie = movie;
 	}
 
 
@@ -65,6 +70,16 @@ public class Review implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+
+	public Movie getMovie() {
+		return movie;
+	}
+
+
+	public void setMovie(Movie movie) {
+		this.movie = movie;
 	}
 
 
