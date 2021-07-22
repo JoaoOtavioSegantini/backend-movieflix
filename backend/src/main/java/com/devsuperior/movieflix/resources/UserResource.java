@@ -13,62 +13,57 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.devsuperior.movieflix.dto.MovieDTO;
-import com.devsuperior.movieflix.services.MovieService;
+import com.devsuperior.movieflix.dto.UserDTO;
+import com.devsuperior.movieflix.dto.UserInsertDTO;
+import com.devsuperior.movieflix.services.UserService;
 
-@RestController
-@RequestMapping(value = "/movies")
-public class MovieResource {
-	
+public class UserResource {
+
 	@Autowired
-	private MovieService service;
-	
-	
+	private UserService service;
+
 	@GetMapping
-	public ResponseEntity<Page<MovieDTO>> findAll(
+	public ResponseEntity<Page<UserDTO>> findAll(
 
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction,
-			@RequestParam(value = "orderBy", defaultValue = "title") String orderBy
+			@RequestParam(value = "orderBy", defaultValue = "firstName") String orderBy
 	) {
 
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 
-         Page<MovieDTO> list = service.findAllPaged(pageRequest);
+         Page<UserDTO> list = service.findAllPaged(pageRequest);
 		return ResponseEntity.ok().body(list);
 	}
-	
+
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<MovieDTO> findById(@PathVariable Long id) {
-		MovieDTO dto = service.findById(id);
+	public ResponseEntity<UserDTO> findById(@PathVariable Long id) {
+		UserDTO dto = service.findById(id);
 		return ResponseEntity.ok().body(dto);
 	}
 
 	@PostMapping
-	public ResponseEntity<MovieDTO> insert(@RequestBody MovieDTO dto) {
-		dto = service.insert(dto);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
-		return ResponseEntity.created(uri).body(dto);
+	public ResponseEntity<UserDTO> insert(@RequestBody UserInsertDTO dto) {
+		UserDTO newDto = service.insert(dto);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newDto.getId()).toUri();
+		return ResponseEntity.created(uri).body(newDto);
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<MovieDTO> update(@PathVariable Long id, @RequestBody MovieDTO dto) {
+	public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody UserDTO dto) {
 		dto = service.update(id, dto);
 
 		return ResponseEntity.ok().body(dto);
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<MovieDTO> delete(@PathVariable Long id) {
+	public ResponseEntity<UserDTO> delete(@PathVariable Long id) {
 		 service.delete(id);
 
 		return ResponseEntity.noContent().build();
 	}
-
 }
