@@ -122,6 +122,12 @@ public class MovieDTO implements Serializable {
 	public void setReviews(List<ReviewDTO> reviews) {
 		this.reviews = reviews;
 	}
+
+
+	
+
+
+
 	
 
 }
