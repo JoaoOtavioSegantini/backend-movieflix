@@ -13,14 +13,22 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.movieflix.dto.MovieDTO;
+import com.devsuperior.movieflix.dto.ReviewDTO;
 import com.devsuperior.movieflix.entities.Movie;
+import com.devsuperior.movieflix.entities.Review;
+import com.devsuperior.movieflix.repositories.GenreRepository;
 import com.devsuperior.movieflix.repositories.MovieRepository;
+import com.devsuperior.movieflix.services.exceptions.DataBaseException;
+import com.devsuperior.movieflix.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class MovieService {
 	
 	@Autowired
 	MovieRepository repository;
+	
+	@Autowired
+	private GenreRepository genreRepository;
 	
 	@Transactional(readOnly = true)
 	public Page<MovieDTO> findAllPaged(PageRequest pageRequest) {
@@ -39,13 +47,31 @@ public class MovieService {
 	@Transactional
 	public MovieDTO insert(MovieDTO dto) {
 		Movie entity = new Movie();
+		copyDtoToEntity(dto, entity);
 		entity = repository.save(entity);
 		return new MovieDTO(entity);
 	}
+	
+	private void copyDtoToEntity(MovieDTO dto, Movie entity) {
+		entity.setTitle(dto.getTitle());
+		entity.setSubTitle(dto.getSubTitle());
+		entity.setSynopsis(dto.getSynopsis());
+		entity.setYear(dto.getYear());
+		entity.setImgUrl(dto.getImgUrl());
+
+		entity.getReviews().clear();
+		for (ReviewDTO revDto : dto.getReviews()) {
+			Review review = categoryRepository.getOne(catDto.getId());
+			entity.getCategories().add(category);
+		}
+
+	}
+	
 	@Transactional
 	public MovieDTO update(Long id, MovieDTO dto) {
 	try {
 		Movie entity = repository.getOne(id);
+		copyDtoToEntity(dto, entity);
 		entity = repository.save(entity);
 		return new MovieDTO(entity);
 	}
