@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -27,21 +29,25 @@ public class Movie implements Serializable {
 	private String synopsis;
 	
 	
-	@OneToMany(mappedBy = "review")
+	@OneToMany(mappedBy = "movie")
 	private List<Review> reviews = new ArrayList<>();
 	
+	@ManyToOne
+	@JoinColumn(name = "genre_id")
+	private Genre genre;
 	
 	public Movie () {
 		
 	}
 
-	public Movie(Long id, String title, String subTitle, Integer year, String imgUrl, String synopsis) {
+	public Movie(Long id, String title, String subTitle, Integer year, String imgUrl, String synopsis, Genre genre) {
 		this.id = id;
 		this.title = title;
 		this.subTitle = subTitle;
 		this.year = year;
 		this.imgUrl = imgUrl;
 		this.synopsis = synopsis;
+		this.genre = genre;
 	}
 
 	public Long getId() {
@@ -94,6 +100,15 @@ public class Movie implements Serializable {
 	
 	public List<Review> getReviews() {
 		return reviews;
+	}
+	
+
+	public Genre getGenre() {
+		return genre;
+	}
+
+	public void setGenre(Genre genre) {
+		this.genre = genre;
 	}
 
 	@Override
