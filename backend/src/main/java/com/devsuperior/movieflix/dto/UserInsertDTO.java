@@ -1,5 +1,6 @@
 package com.devsuperior.movieflix.dto;
 
+@UserInsertValid
 public class UserInsertDTO extends UserDTO {
 
 
