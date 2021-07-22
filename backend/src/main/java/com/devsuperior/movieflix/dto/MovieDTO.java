@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import com.devsuperior.movieflix.entities.Movie;
 import com.devsuperior.movieflix.entities.Review;
 
@@ -12,11 +15,22 @@ public class MovieDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
-	
+	@Size(min = 5, max = 60, message = "O campo título deve ter no mínimo 5 letras e no máximo 60")
+	@NotBlank(message = "Campo obrigatório")
 	private String title;
+	
+	@NotBlank(message = "Campo obrigatório")
+	@Size(min = 5, max = 60, message = "O campo subtítulo deve ter no mínimo 5 letras e no máximo 60")
 	private String subTitle;
+	
+	@NotBlank(message = "Campo obrigatório")
 	private Integer year;
+	
+	@NotBlank(message = "Campo obrigatório")
 	private String imgUrl;
+	
+	@NotBlank(message = "Campo obrigatório")
+	@Size(min = 20, max = 100, message = "O campo título deve ter no mínimo 20 letras e no máximo 100")
 	private String synopsis;
 	
 	private List<ReviewDTO> reviews = new ArrayList<>();
