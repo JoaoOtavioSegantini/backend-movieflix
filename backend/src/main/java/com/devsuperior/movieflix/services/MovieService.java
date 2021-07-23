@@ -16,8 +16,8 @@ import com.devsuperior.movieflix.dto.MovieDTO;
 import com.devsuperior.movieflix.dto.ReviewDTO;
 import com.devsuperior.movieflix.entities.Movie;
 import com.devsuperior.movieflix.entities.Review;
-import com.devsuperior.movieflix.repositories.GenreRepository;
 import com.devsuperior.movieflix.repositories.MovieRepository;
+import com.devsuperior.movieflix.repositories.ReviewRepository;
 import com.devsuperior.movieflix.services.exceptions.DataBaseException;
 import com.devsuperior.movieflix.services.exceptions.ResourceNotFoundException;
 
@@ -28,7 +28,7 @@ public class MovieService {
 	MovieRepository repository;
 	
 	@Autowired
-	private GenreRepository genreRepository;
+	private ReviewRepository reviewRepository;
 	
 	@Transactional(readOnly = true)
 	public Page<MovieDTO> findAllPaged(PageRequest pageRequest) {
@@ -42,7 +42,7 @@ public class MovieService {
 	public MovieDTO findById(Long id) {
 		Optional<Movie> obj = repository.findById(id);
 		Movie entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
-		return new MovieDTO(entity, entity.getReviews());
+		return new MovieDTO(entity);
 	}
 	@Transactional
 	public MovieDTO insert(MovieDTO dto) {
@@ -58,11 +58,12 @@ public class MovieService {
 		entity.setSynopsis(dto.getSynopsis());
 		entity.setYear(dto.getYear());
 		entity.setImgUrl(dto.getImgUrl());
+		entity.setGenre(dto.getGenre());
 
 		entity.getReviews().clear();
 		for (ReviewDTO revDto : dto.getReviews()) {
-			Review review = categoryRepository.getOne(catDto.getId());
-			entity.getCategories().add(category);
+			Review review = reviewRepository.getOne(revDto.getId());
+			entity.getReviews().add(review);
 		}
 
 	}

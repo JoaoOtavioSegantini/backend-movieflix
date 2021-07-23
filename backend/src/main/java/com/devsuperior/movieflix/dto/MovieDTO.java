@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.devsuperior.movieflix.entities.Genre;
 import com.devsuperior.movieflix.entities.Movie;
 import com.devsuperior.movieflix.entities.Review;
 
@@ -33,6 +34,8 @@ public class MovieDTO implements Serializable {
 	@Size(min = 20, max = 100, message = "O campo título deve ter no mínimo 20 letras e no máximo 100")
 	private String synopsis;
 	
+	private Genre genre;
+	
 	private List<ReviewDTO> reviews = new ArrayList<>();
 	
 	
@@ -41,7 +44,7 @@ public class MovieDTO implements Serializable {
 	}
 
 
-	public MovieDTO(Long id, String title, String subTitle, Integer year, String imgUrl, String synopsis) {
+	public MovieDTO(Long id, String title, String subTitle, Integer year, String imgUrl, String synopsis, Genre genre) {
 		
 		this.id = id;
 		this.title = title;
@@ -49,6 +52,7 @@ public class MovieDTO implements Serializable {
 		this.year = year;
 		this.imgUrl = imgUrl;
 		this.synopsis = synopsis;
+		this.genre = genre;
 	}
 	
 	public MovieDTO(Movie entity) {
@@ -59,6 +63,7 @@ public class MovieDTO implements Serializable {
 		this.year = entity.getYear();
 		this.imgUrl = entity.getImgUrl();
 		this.synopsis = entity.getSynopsis();
+		this.genre = entity.getGenre();
 	}
 	
 	 public MovieDTO(Movie entity, Set<Review> reviews) {
@@ -138,7 +143,9 @@ public class MovieDTO implements Serializable {
 	}
 
 
-	
+	public Genre getGenre() {
+		return genre;
+	}
 
 
 
