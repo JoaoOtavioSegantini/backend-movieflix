@@ -31,7 +31,7 @@ public class MovieDTO implements Serializable {
 	private String imgUrl;
 	
 	@NotBlank(message = "Campo obrigatório")
-	@Size(min = 20, max = 100, message = "O campo título deve ter no mínimo 20 letras e no máximo 100")
+	@Size(min = 20, max = 100, message = "O campo da descrição deve ter no mínimo 20 letras e no máximo 100")
 	private String synopsis;
 	
 	private Genre genre;
