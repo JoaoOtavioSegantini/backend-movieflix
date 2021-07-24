@@ -1,12 +1,15 @@
 package com.devsuperior.movieflix.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
+import com.devsuperior.movieflix.entities.Review;
 import com.devsuperior.movieflix.entities.User;
 
 public class UserDTO implements Serializable {
@@ -25,6 +28,9 @@ public class UserDTO implements Serializable {
 
 
 	Set<RoleDTO> roles = new HashSet<>();
+	
+	private List<ReviewDTO> reviews = new ArrayList<>();
+
 
 	public UserDTO() {
 
@@ -43,6 +49,12 @@ public class UserDTO implements Serializable {
 		name = entity.getName();
 		entity.getRoles().forEach(role -> this.roles.add(new RoleDTO(role)));
 	}
+	
+	 public UserDTO(User entity, Set<Review> reviews) {
+	    	this(entity);
+	    	reviews.forEach(rev -> this.reviews.add(new ReviewDTO(rev)));
+
+	    }
 
 	public Long getId() {
 		return id;
@@ -71,6 +83,10 @@ public class UserDTO implements Serializable {
 
 	public Set<RoleDTO> getRoles() {
 		return roles;
+	}
+	
+	public List<ReviewDTO> getReviews() {
+		return reviews;
 	}
 
 

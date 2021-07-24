@@ -30,6 +30,8 @@ public class Review implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "movie_id")
 	private Movie movie;
+	
+	
 	public Review () {
 		
 	}

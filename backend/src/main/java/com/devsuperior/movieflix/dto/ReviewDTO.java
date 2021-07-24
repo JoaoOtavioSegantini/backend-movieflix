@@ -53,13 +53,6 @@ public class ReviewDTO implements Serializable {
 		this.text = text;
 	}
 
-	public Movie getMovie() {
-		return movie;
-	}
-
-	public void setMovie(Movie movie) {
-		this.movie = movie;
-	}
 
 	public Long getMovieId() {
 		return movieId;

@@ -39,7 +39,6 @@ public class MovieService {
 	public Page<MovieDTO> findAllPaged(Long genreId, PageRequest pageRequest) {
 		Genre genre = (genreId == 0) ? null : genreRepository.getOne(genreId);		
 		Page<Movie> list = repository.find(genre, pageRequest);
-
 		return list.map(x -> new MovieDTO(x));
 
 

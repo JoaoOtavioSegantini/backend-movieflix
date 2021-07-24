@@ -16,12 +16,12 @@ public class MovieDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
-	@Size(min = 5, max = 60, message = "O campo título deve ter no mínimo 5 letras e no máximo 60")
+	@Size(max = 60, message = "O campo título deve ter no máximo 60")
 	@NotBlank(message = "Campo obrigatório")
 	private String title;
 	
 	@NotBlank(message = "Campo obrigatório")
-	@Size(min = 5, max = 60, message = "O campo subtítulo deve ter no mínimo 5 letras e no máximo 60")
+	@Size(min = 5, max = 100, message = "O campo subtítulo deve ter no mínimo 5 letras e no máximo 60")
 	private String subTitle;
 	
 	@NotBlank(message = "Campo obrigatório")
@@ -31,10 +31,12 @@ public class MovieDTO implements Serializable {
 	private String imgUrl;
 	
 	@NotBlank(message = "Campo obrigatório")
-	@Size(min = 20, max = 100, message = "O campo da descrição deve ter no mínimo 20 letras e no máximo 100")
+	@Size(min = 10, max = 300, message = "O campo da descrição deve ter no mínimo 20 letras e no máximo 100")
 	private String synopsis;
 	
 	private Genre genre;
+	
+	private Long genreId;
 	
 	private List<ReviewDTO> reviews = new ArrayList<>();
 	
@@ -44,7 +46,7 @@ public class MovieDTO implements Serializable {
 	}
 
 
-	public MovieDTO(Long id, String title, String subTitle, Integer year, String imgUrl, String synopsis, Genre genre) {
+	public MovieDTO(Long id, String title, String subTitle, Integer year, String imgUrl, String synopsis, Long genreId) {
 		
 		this.id = id;
 		this.title = title;
@@ -52,7 +54,7 @@ public class MovieDTO implements Serializable {
 		this.year = year;
 		this.imgUrl = imgUrl;
 		this.synopsis = synopsis;
-		this.genre = genre;
+		this.genreId = genre.getId();
 	}
 	
 	public MovieDTO(Movie entity) {
@@ -63,7 +65,7 @@ public class MovieDTO implements Serializable {
 		this.year = entity.getYear();
 		this.imgUrl = entity.getImgUrl();
 		this.synopsis = entity.getSynopsis();
-		this.genre = entity.getGenre();
+		this.genreId = entity.getGenre().getId();
 	}
 	
 	 public MovieDTO(Movie entity, Set<Review> reviews) {
@@ -143,9 +145,26 @@ public class MovieDTO implements Serializable {
 	}
 
 
+	public Long getGenreId() {
+		return genreId;
+	}
+
+
+	public void setGenreId(Long genreId) {
+		this.genreId = genreId;
+	}
+
+
 	public Genre getGenre() {
 		return genre;
 	}
+
+
+	public void setGenre(Genre genre) {
+		this.genre = genre;
+	}
+
+
 
 
 

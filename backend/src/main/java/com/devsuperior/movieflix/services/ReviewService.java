@@ -36,6 +36,10 @@ public class ReviewService {
 	private void copyDtoToEntity(ReviewDTO dto, Review entity) {
 		entity.setText(dto.getText());
 		entity.setId(dto.getId());
+	  //  Long movieId = dto.setMovieId(entity.getMovie().getId());
+		entity.getMovie();
+		entity.getUser();
+		
 
 	}
 	

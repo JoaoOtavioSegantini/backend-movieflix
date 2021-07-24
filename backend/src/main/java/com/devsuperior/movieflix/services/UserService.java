@@ -18,12 +18,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.devsuperior.movieflix.dto.ReviewDTO;
 import com.devsuperior.movieflix.dto.RoleDTO;
 import com.devsuperior.movieflix.dto.UserDTO;
 import com.devsuperior.movieflix.dto.UserInsertDTO;
 import com.devsuperior.movieflix.dto.UserUpdateDTO;
+import com.devsuperior.movieflix.entities.Review;
 import com.devsuperior.movieflix.entities.Role;
 import com.devsuperior.movieflix.entities.User;
+import com.devsuperior.movieflix.repositories.ReviewRepository;
 import com.devsuperior.movieflix.repositories.RoleRepository;
 import com.devsuperior.movieflix.repositories.UserRepository;
 import com.devsuperior.movieflix.services.exceptions.DataBaseException;
@@ -42,6 +45,9 @@ public class UserService implements UserDetailsService {
 
 	@Autowired
 	private RoleRepository roleRepository;
+	
+	@Autowired
+	private ReviewRepository reviewRepository;
 
 
 	@Transactional(readOnly = true)
@@ -76,6 +82,12 @@ public class UserService implements UserDetailsService {
 		for (RoleDTO roleDto : dto.getRoles()) {
 			Role role = roleRepository.getOne(roleDto.getId());
 			entity.getRoles().add(role);
+		}
+		
+		entity.getReviews().clear();
+		for (ReviewDTO revDto : dto.getReviews()) {
+			Review review = reviewRepository.getOne(revDto.getId());
+			entity.getReviews().add(review);
 		}
 
 	}

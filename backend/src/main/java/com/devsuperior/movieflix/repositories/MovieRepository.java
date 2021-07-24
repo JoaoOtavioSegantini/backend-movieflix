@@ -12,9 +12,10 @@ import com.devsuperior.movieflix.entities.Movie;
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> {
 	
-	@Query("SELECT DISTINCT obj FROM Movie obj INNER JOIN obj.genres gers WHERE "
-			+ "(COALESCE(:genres) IS NULL OR gers IN :genres)")
+	@Query("SELECT obj FROM Movie obj WHERE :genre IS NULL OR obj.genre = :genre")
 	Page<Movie> find(Genre genre, Pageable pageable);
 
 
 }
+
+

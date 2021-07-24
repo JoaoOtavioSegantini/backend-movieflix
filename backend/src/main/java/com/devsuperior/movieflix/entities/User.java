@@ -99,9 +99,10 @@ public class User implements UserDetails, Serializable {
 		return roles;
 	}
 	
-	public List<Review> getNotifications() {
+	public List<Review> getReviews() {
 		return reviews;
 	}
+
 
 	@Override
 	public int hashCode() {

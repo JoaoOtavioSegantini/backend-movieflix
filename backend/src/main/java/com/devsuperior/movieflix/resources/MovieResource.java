@@ -35,7 +35,7 @@ public class MovieResource {
 	public ResponseEntity<Page<MovieDTO>> findAll(
 
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
-			@RequestParam(value = "genreId", defaultValue = "0") Long genreId,
+        	@RequestParam(value = "genreId", defaultValue = "0") Long genreId,
 			@RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction,
 			@RequestParam(value = "orderBy", defaultValue = "title") String orderBy
