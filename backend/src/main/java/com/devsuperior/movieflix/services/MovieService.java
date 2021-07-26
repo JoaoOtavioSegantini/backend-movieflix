@@ -27,7 +27,7 @@ import com.devsuperior.movieflix.services.exceptions.ResourceNotFoundException;
 public class MovieService {
 	
 	@Autowired
-	MovieRepository repository;
+	private MovieRepository repository;
 	
 	@Autowired
 	private ReviewRepository reviewRepository;
@@ -63,7 +63,8 @@ public class MovieService {
 		entity.setSynopsis(dto.getSynopsis());
 		entity.setYear(dto.getYear());
 		entity.setImgUrl(dto.getImgUrl());
-		entity.setGenre(dto.getGenre());
+		Genre genre = genreRepository.getOne(dto.getGenreId());
+		entity.setGenre(genre);
 
 		entity.getReviews().clear();
 		for (ReviewDTO revDto : dto.getReviews()) {

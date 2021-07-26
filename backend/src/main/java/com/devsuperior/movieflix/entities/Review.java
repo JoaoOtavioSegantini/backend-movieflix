@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "tb_review")
@@ -20,6 +21,8 @@ public class Review implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@NotBlank(message = "Não é permitido inserir texto vazio na avaliação")
 	private String text;
 	
 	
@@ -30,8 +33,6 @@ public class Review implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "movie_id")
 	private Movie movie;
-	
-	
 	public Review () {
 		
 	}
@@ -73,6 +74,7 @@ public class Review implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
 
 
 	public Movie getMovie() {

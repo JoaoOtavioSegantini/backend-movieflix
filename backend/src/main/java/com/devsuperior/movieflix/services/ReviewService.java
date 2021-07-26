@@ -9,8 +9,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.movieflix.dto.ReviewDTO;
+import com.devsuperior.movieflix.entities.Movie;
 import com.devsuperior.movieflix.entities.Review;
+import com.devsuperior.movieflix.entities.User;
+import com.devsuperior.movieflix.repositories.MovieRepository;
 import com.devsuperior.movieflix.repositories.ReviewRepository;
+import com.devsuperior.movieflix.repositories.UserRepository;
 import com.devsuperior.movieflix.services.exceptions.ResourceNotFoundException;
 
 @Service
@@ -18,6 +22,15 @@ public class ReviewService {
 	
 	@Autowired
 	ReviewRepository repository;
+	
+	@Autowired
+	AuthService authService;
+	
+	@Autowired
+	UserRepository userRepository;
+	
+	@Autowired 
+	private MovieRepository movieRepository;
 	
 	@Transactional(readOnly = true)
 	public List<ReviewDTO> findAll(){
@@ -33,22 +46,18 @@ public class ReviewService {
 		return new ReviewDTO(entity);
 	}
 	
-	private void copyDtoToEntity(ReviewDTO dto, Review entity) {
-		entity.setText(dto.getText());
-		entity.setId(dto.getId());
-	  //  Long movieId = dto.setMovieId(entity.getMovie().getId());
-		entity.getMovie();
-		entity.getUser();
-		
 
-	}
 	
 	@Transactional
 	public ReviewDTO insert(ReviewDTO dto) {
-		Review entity = new Review();
-		copyDtoToEntity(dto, entity);
-		entity = repository.save(entity);
-		return new ReviewDTO(entity);
+		String text = dto.getText();
+		String username = authService.authenticated().getEmail();
+		User user = userRepository.findByEmail(username);
+		Movie movie = movieRepository.getOne(dto.getMovieId());
+	    Review review = new Review(null, text, user, movie);
+		
+		repository.save(review);
+		return new ReviewDTO(review);
 	}
 	
 

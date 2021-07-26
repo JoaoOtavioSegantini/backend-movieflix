@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.devsuperior.movieflix.dto.UserDTO;
@@ -23,6 +25,8 @@ import com.devsuperior.movieflix.dto.UserInsertDTO;
 import com.devsuperior.movieflix.dto.UserUpdateDTO;
 import com.devsuperior.movieflix.services.UserService;
 
+@RestController
+@RequestMapping(value = "/users")
 public class UserResource {
 
 	@Autowired

@@ -3,39 +3,24 @@ package com.devsuperior.movieflix.dto;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-
-import com.devsuperior.movieflix.entities.Genre;
 import com.devsuperior.movieflix.entities.Movie;
-import com.devsuperior.movieflix.entities.Review;
 
 public class MovieDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
-	@Size(max = 60, message = "O campo título deve ter no máximo 60")
-	@NotBlank(message = "Campo obrigatório")
+
 	private String title;
 	
-	@NotBlank(message = "Campo obrigatório")
-	@Size(min = 5, max = 100, message = "O campo subtítulo deve ter no mínimo 5 letras e no máximo 60")
 	private String subTitle;
 	
-	@NotBlank(message = "Campo obrigatório")
 	private Integer year;
 	
-	@NotBlank(message = "Campo obrigatório")
 	private String imgUrl;
-	
-	@NotBlank(message = "Campo obrigatório")
-	@Size(min = 10, max = 300, message = "O campo da descrição deve ter no mínimo 20 letras e no máximo 100")
+		
 	private String synopsis;
-	
-	private Genre genre;
-	
+		
 	private Long genreId;
 	
 	private List<ReviewDTO> reviews = new ArrayList<>();
@@ -54,7 +39,7 @@ public class MovieDTO implements Serializable {
 		this.year = year;
 		this.imgUrl = imgUrl;
 		this.synopsis = synopsis;
-		this.genreId = genre.getId();
+		this.genreId = genreId;
 	}
 	
 	public MovieDTO(Movie entity) {
@@ -66,13 +51,9 @@ public class MovieDTO implements Serializable {
 		this.imgUrl = entity.getImgUrl();
 		this.synopsis = entity.getSynopsis();
 		this.genreId = entity.getGenre().getId();
+		entity.getReviews().forEach(rev -> this.reviews.add(new ReviewDTO(rev)));
 	}
 	
-	 public MovieDTO(Movie entity, Set<Review> reviews) {
-	    	this(entity);
-	    	reviews.forEach(rev -> this.reviews.add(new ReviewDTO(rev)));
-
-	    }
 
 
 	public Long getId() {
@@ -153,20 +134,6 @@ public class MovieDTO implements Serializable {
 	public void setGenreId(Long genreId) {
 		this.genreId = genreId;
 	}
-
-
-	public Genre getGenre() {
-		return genre;
-	}
-
-
-	public void setGenre(Genre genre) {
-		this.genre = genre;
-	}
-
-
-
-
 
 	
 
