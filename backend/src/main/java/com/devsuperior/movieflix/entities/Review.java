@@ -22,7 +22,6 @@ public class Review implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank(message = "Não é permitido inserir texto vazio na avaliação")
 	private String text;
 	
 	

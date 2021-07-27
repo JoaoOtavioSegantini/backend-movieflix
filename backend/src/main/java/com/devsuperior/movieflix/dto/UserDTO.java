@@ -16,8 +16,8 @@ public class UserDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-
 	private Long id;
+	
 	@NotBlank(message = "Campo obrigatório!")
 	@Email(message = "Email inválido")
 	private String email;

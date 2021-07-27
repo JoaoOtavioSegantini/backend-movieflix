@@ -2,6 +2,8 @@ package com.devsuperior.movieflix.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotBlank;
+
 import com.devsuperior.movieflix.entities.Review;
 
 public class ReviewDTO implements Serializable {
@@ -9,6 +11,7 @@ public class ReviewDTO implements Serializable {
 	
 	private Long id;
 	
+	@NotBlank(message = "Não é permitido inserir texto vazio na avaliação")
 	private String text;
 		
 	private Long movieId;
