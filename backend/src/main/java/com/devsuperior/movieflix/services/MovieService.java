@@ -13,10 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.movieflix.dto.MovieDTO;
-import com.devsuperior.movieflix.dto.ReviewDTO;
 import com.devsuperior.movieflix.entities.Genre;
 import com.devsuperior.movieflix.entities.Movie;
-import com.devsuperior.movieflix.entities.Review;
 import com.devsuperior.movieflix.repositories.GenreRepository;
 import com.devsuperior.movieflix.repositories.MovieRepository;
 import com.devsuperior.movieflix.repositories.ReviewRepository;
@@ -29,8 +27,8 @@ public class MovieService {
 	@Autowired
 	private MovieRepository repository;
 	
-	@Autowired
-	private ReviewRepository reviewRepository;
+	//@Autowired
+//	private ReviewRepository reviewRepository;
 	
 	@Autowired
 	private GenreRepository genreRepository;
@@ -66,11 +64,11 @@ public class MovieService {
 		Genre genre = genreRepository.getOne(dto.getGenreId());
 		entity.setGenre(genre);
 
-		entity.getReviews().clear();
-		for (ReviewDTO revDto : dto.getReviews()) {
-			Review review = reviewRepository.getOne(revDto.getId());
-			entity.getReviews().add(review);
-		}
+	//	entity.getReviews().clear();
+//		for (ReviewDTO revDto : dto.getReviews()) {
+	//		Review review = reviewRepository.getOne(revDto.getId());
+//			entity.getReviews().add(review);
+	//	}
 
 	}
 	

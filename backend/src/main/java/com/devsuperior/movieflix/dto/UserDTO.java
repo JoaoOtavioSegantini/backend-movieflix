@@ -28,7 +28,7 @@ public class UserDTO implements Serializable {
 
 	Set<RoleDTO> roles = new HashSet<>();
 	
-	private List<ReviewDTO> reviews = new ArrayList<>();
+//	private List<ReviewDTO> reviews = new ArrayList<>();
 
 
 	public UserDTO() {
@@ -47,7 +47,7 @@ public class UserDTO implements Serializable {
 		email = entity.getEmail();
 		name = entity.getName();
 		entity.getRoles().forEach(role -> this.roles.add(new RoleDTO(role)));
-		entity.getReviews().forEach(rev -> this.reviews.add(new ReviewDTO(rev)));
+//		entity.getReviews().forEach(rev -> this.reviews.add(new ReviewDTO(rev)));
 	}
 	
 
@@ -80,9 +80,9 @@ public class UserDTO implements Serializable {
 		return roles;
 	}
 	
-	public List<ReviewDTO> getReviews() {
-		return reviews;
-	}
+	//public List<ReviewDTO> getReviews() {
+	//	return reviews;
+	//}
 
 
 }

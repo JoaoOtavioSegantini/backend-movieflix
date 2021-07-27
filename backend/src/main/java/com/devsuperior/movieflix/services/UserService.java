@@ -84,11 +84,11 @@ public class UserService implements UserDetailsService {
 			entity.getRoles().add(role);
 		}
 		
-		entity.getReviews().clear();
-		for (ReviewDTO revDto : dto.getReviews()) {
-			Review review = reviewRepository.getOne(revDto.getId());
-			entity.getReviews().add(review);
-		}
+	//	entity.getReviews().clear();
+		//for (ReviewDTO revDto : dto.getReviews()) {
+			//Review review = reviewRepository.getOne(revDto.getId());
+		//	entity.getReviews().add(review);
+	//	}
 
 	}
 	@Transactional

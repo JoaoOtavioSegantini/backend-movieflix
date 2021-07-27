@@ -1,8 +1,8 @@
 package com.devsuperior.movieflix.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.devsuperior.movieflix.entities.Movie;
 
@@ -23,8 +23,9 @@ public class MovieDTO implements Serializable {
 		
 	private Long genreId;
 	
-	private List<ReviewDTO> reviews = new ArrayList<>();
+	private Set<GenreDTO> genres = new HashSet<>();
 	
+	private Set<ReviewDTO> reviews = new HashSet<>();
 	
 	public MovieDTO() {
 		
@@ -116,13 +117,13 @@ public class MovieDTO implements Serializable {
 	}
 
 
-	public List<ReviewDTO> getReviews() {
+	public Set<ReviewDTO> getReviews() {
 		return reviews;
 	}
 
 
-	public void setReviews(List<ReviewDTO> reviews) {
-		this.reviews = reviews;
+	public Set<GenreDTO> getGenres() {
+		return genres;
 	}
 
 
