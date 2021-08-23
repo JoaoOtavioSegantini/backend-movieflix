@@ -8,7 +8,7 @@ This project was developed using the following technologies:
 
 - [Java](https://docs.oracle.com/en/java/javase/11/)
 - [Spring Boot](https://spring.io/projects/spring-boot)
-- [Hibernate](https://docs.jboss.org/hibernate/stable/orm/userguide/html_single/Hibernate_User_Guide html)
+- [Hibernate](https://docs.jboss.org/hibernate/stable/orm/userguide/html_single/Hibernate_User_Guide)
 - [Maven](https://maven.apache.org/guides/)
 
 
